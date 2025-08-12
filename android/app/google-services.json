@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "18628533737",
+    "project_id": "bookandplay-df5ef",
+    "storage_bucket": "bookandplay-df5ef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18628533737:android:3db3a48d1ca7ae8381bf78",
+        "android_client_info": {
+          "package_name": "com.example.metodo_tarjetas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbjMtzXum2KWuybR5wRQHaLCvLNXP-6MY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18628533737:android:12319a111c87861a81bf78",
+        "android_client_info": {
+          "package_name": "com.example.metodospago"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbjMtzXum2KWuybR5wRQHaLCvLNXP-6MY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
