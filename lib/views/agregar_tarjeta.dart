@@ -173,7 +173,7 @@ class _AddCardPageState extends State<AddCardPage> {
         SizedBox(width: 15),
         GestureDetector(
           onTap: () {
-            // Lógica para abrir un selector de color
+            
           },
           child: Container(
             width: 40,

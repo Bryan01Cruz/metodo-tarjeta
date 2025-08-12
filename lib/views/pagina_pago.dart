@@ -8,7 +8,29 @@ import 'package:metodo_tarjetas/controllers/controlador_tarjeta.dart';
 class PaymentMethodsPage extends StatelessWidget {
   PaymentMethodsPage({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      title: 'Métodos de Pago',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(color: Colors.black, fontSize: 18),
+        ),
+      ),
+      home: _PaymentMethodsPageContent(),
+    );
+  }
+}
+
+class _PaymentMethodsPageContent extends StatelessWidget {
   final PaymentController controller = Get.put(PaymentController());
+
+  _PaymentMethodsPageContent({Key? key}) : super(key: key);
 
   void _showSnackBar(BuildContext context, String message, {Color color = Colors.black}) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -25,7 +47,6 @@ class PaymentMethodsPage extends StatelessWidget {
       _showSnackBar(context, 'Debe seleccionar una tarjeta.', color: Colors.red);
     } else {
       _showSnackBar(context, 'El pago a sido realizado con exito.', color: Colors.green);
-      // Aquí podrías agregar la lógica real de pago
     }
   }
 
@@ -67,40 +88,40 @@ class PaymentMethodsPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () {}//=> Get.back(),
+          onPressed: () => Get.back(),
         ),
         title: Text('Volver'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Método de pago',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Tarjetas de crédito y débito',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance.collection('tarjetas').snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Text('Algo salió mal');
+                  return const Text('Algo salió mal');
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.data!.docs.isEmpty) {
-                  return Text('No tienes tarjetas guardadas.');
+                  return const Text('No tienes tarjetas guardadas.');
                 }
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot doc = snapshot.data!.docs[index];
@@ -114,7 +135,7 @@ class PaymentMethodsPage extends StatelessWidget {
                       child: Obx(() {
                         bool isSelected = controller.selectedCardId == docId;
                         return Container(
-                          margin: EdgeInsets.only(bottom: 10.0),
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: isSelected ? Colors.orange : Colors.transparent,
@@ -131,7 +152,7 @@ class PaymentMethodsPage extends StatelessWidget {
                                 cardColor: Color(data['color']),
                               ),
                               if (isSelected)
-                                Positioned(
+                                const Positioned(
                                   top: 10,
                                   right: 10,
                                   child: Icon(
@@ -140,12 +161,11 @@ class PaymentMethodsPage extends StatelessWidget {
                                     size: 24,
                                   ),
                                 ),
-                              // Ícono de eliminar movido a la parte superior izquierda
                               Positioned(
                                 top: 10,
                                 left: 10,
                                 child: IconButton(
-                                  icon: Icon(Icons.delete, color: Colors.white),
+                                  icon: const Icon(Icons.delete, color: Colors.white),
                                   onPressed: () => _deleteCard(context, docId),
                                 ),
                               ),
@@ -158,9 +178,9 @@ class PaymentMethodsPage extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildAddCardButton(context),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildPayButton(context),
           ],
         ),
@@ -174,12 +194,12 @@ class PaymentMethodsPage extends StatelessWidget {
         Get.to(() => AddCardPage());
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(15.0),
         ),
-        child: Row(
+        child: const Row(
           children: [
             Icon(Icons.add_circle_outline, color: Colors.black),
             SizedBox(width: 10),
@@ -199,13 +219,13 @@ class PaymentMethodsPage extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFFFF9866),
+          backgroundColor: const Color(0xFFFF9866),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
         ),
         onPressed: () => _handlePayment(context),
-        child: Text(
+        child: const Text(
           'Pagar',
           style: TextStyle(fontSize: 18, color: Colors.white),
         ),

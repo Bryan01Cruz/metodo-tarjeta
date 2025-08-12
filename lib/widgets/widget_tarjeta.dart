@@ -28,7 +28,7 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Usamos el método para obtener la ruta del logo
+
     final String cardLogoPath = _getCardLogo(cardNumber.replaceAll(' ', ''));
     
     return Container(
